@@ -1,5 +1,6 @@
 using System;
 using System.Xml.XPath;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,22 +25,27 @@ public class PlayerController : MonoBehaviour, IMovementInput
     #endregion
 
     private InputAction _lookAt;
+    private InputAction _attack;
+
     public InputAction MovementInput => _move;
     public InputAction LookInput => _lookAt;
+    public InputAction AttackInput => _attack;
 
     private void Awake()
     {
         _playerInputs = new PlayerInputActions();
         _rb = GetComponent<Rigidbody>();
+
+        _move = _playerInputs.Player.Move;
+        _lookAt = _playerInputs.Player.Look;
+        _attack = _playerInputs.Player.Attack;
     }
 
     private void OnEnable()
     {
-        _move = _playerInputs.Player.Move;
         _move.Enable();
-
-        _lookAt = _playerInputs.Player.Look;
         _lookAt.Enable();
+        _attack.Enable();
     }
 
 
@@ -47,5 +53,6 @@ public class PlayerController : MonoBehaviour, IMovementInput
     {
         _move.Disable();
         _lookAt.Disable();
+        _attack.Disable();
     }
 }

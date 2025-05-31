@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour, IMovementInput
     [SerializeField]
     private float _speed = 300.0f;
 
+    [SerializeField]
+    private MovementType _movementApplicationType;
+
     private InputAction _move;
     public Vector2 MovementDirection => _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
     public float Speed => _speed;
     public Rigidbody MoveTarget => _rb;
-    public MovementType ApplicationType => MovementType.FacingDirection;
+    public MovementType ApplicationType => _movementApplicationType;
     #endregion
 
     private InputAction _lookAt;

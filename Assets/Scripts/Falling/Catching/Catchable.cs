@@ -15,7 +15,7 @@ public class Catchable : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField]
-    private CatcherActions _requiredAction;
+    private CatchActionAssociatedData _requiredAction;
 
     [SerializeField]
     private ColorSwap _colourLerper;
@@ -31,17 +31,24 @@ public class Catchable : MonoBehaviour
         }
 
         _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
+        _colourLerper.SetFocusColour(_requiredAction);
     }
 
-    public void OnDrop()
+    public void OnDrop(CatchActionAssociatedData requiredAction)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = rb.gravityScale <= 0.0f ? 1.0f : rb.gravityScale;
+
+        if (requiredAction != null)
+        {
+            _requiredAction = requiredAction;
+            _colourLerper.SetFocusColour(_requiredAction);
+        }
     }
 
     public virtual void OnCatch(Catcher catcher)
     {
-        if (catcher.MainAction == _requiredAction)
+        if (catcher.MainAction == _requiredAction.Action)
         {
             Debug.Log("catched");
             OnCatched?.Invoke();
@@ -131,7 +138,6 @@ public class ColorSwap
 {
     [SerializeField]
     private Color _defaultColour;
-    [SerializeField]
     private Color _focusColour;
     [SerializeField]
     private float _transitionDuration;
@@ -139,6 +145,11 @@ public class ColorSwap
     private bool _isFocusTransition;
 
     private float _alpha => _progress / _transitionDuration;
+
+    public void SetFocusColour(CatchActionAssociatedData data)
+    {
+        _focusColour = data.Colour;
+    }
 
     public void StartTransition(bool isFocusTransition)
     {

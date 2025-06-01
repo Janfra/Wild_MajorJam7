@@ -15,7 +15,16 @@ public class LineSpawner : MonoBehaviour
     private Catchable[] _prefabOptions;
 
     [SerializeField]
+    private CatchActionAssociatedData[] _possibleActions;
+
+    [SerializeField]
     private BasicTimer _spawnTimer;
+
+    private void Awake()
+    {
+        VerifyArray(_prefabOptions);
+        VerifyArray(_possibleActions);
+    }
 
     private void Start()
     {
@@ -30,8 +39,8 @@ public class LineSpawner : MonoBehaviour
     private void Spawn()
     {
         float xPosition = Random.Range(_spawnXRange.x, _spawnXRange.y);
-        Catchable instance = Instantiate(SelectRandomPrefab(), GetSpawnVector(xPosition), Quaternion.identity);
-        instance.OnDrop();
+        Catchable instance = Instantiate(GetRandomItemFromArray(_prefabOptions), GetSpawnVector(xPosition), Quaternion.identity);
+        instance.OnDrop(GetRandomItemFromArray(_possibleActions));
     }
 
     private Vector3 GetSpawnVector(float xPosition)
@@ -39,10 +48,18 @@ public class LineSpawner : MonoBehaviour
         return new Vector3(xPosition, _spawnHeight, _spawnDepth);
     }
 
-    private Catchable SelectRandomPrefab()
+    private T GetRandomItemFromArray<T>(T[] array)
     {
-        int index = Random.Range(0, _prefabOptions.Length);
-        return _prefabOptions[index];
+        int index = Random.Range(0, array.Length);
+        return array[index];
+    }
+
+    private void VerifyArray<T>(T[] array)
+    {
+        if (array.Length == 0)
+        {
+            throw new System.NullReferenceException($"Please add items to the {array} array in {name}");
+        }
     }
 
     private void OnDrawGizmos()

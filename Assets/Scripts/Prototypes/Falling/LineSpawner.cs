@@ -12,7 +12,7 @@ public class LineSpawner : MonoBehaviour
     private float _spawnDepth;
 
     [SerializeField]
-    private Rigidbody2D _prefab;
+    private Catchable[] _prefabOptions;
 
     [SerializeField]
     private BasicTimer _spawnTimer;
@@ -30,13 +30,19 @@ public class LineSpawner : MonoBehaviour
     private void Spawn()
     {
         float xPosition = Random.Range(_spawnXRange.x, _spawnXRange.y);
-        Rigidbody2D instance = Instantiate(_prefab, GetSpawnVector(xPosition), Quaternion.identity);
-        instance.gravityScale = instance.gravityScale <= 0.0f ? 1.0f : instance.gravityScale;
+        Catchable instance = Instantiate(SelectRandomPrefab(), GetSpawnVector(xPosition), Quaternion.identity);
+        instance.OnDrop();
     }
 
     private Vector3 GetSpawnVector(float xPosition)
     {
         return new Vector3(xPosition, _spawnHeight, _spawnDepth);
+    }
+
+    private Catchable SelectRandomPrefab()
+    {
+        int index = Random.Range(0, _prefabOptions.Length);
+        return _prefabOptions[index];
     }
 
     private void OnDrawGizmos()

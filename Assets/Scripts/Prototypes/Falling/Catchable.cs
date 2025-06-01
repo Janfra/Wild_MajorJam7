@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(CircleCollider2D), typeof(Rigidbody2D))]
 public class Catchable : MonoBehaviour
 {
     public delegate void CatchableAction();
@@ -12,6 +13,10 @@ public class Catchable : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+
+    [SerializeField]
+    private CatcherActions _requiredAction;
+
     [SerializeField]
     private ColorSwap _colourLerper;
     private Coroutine _colorLerpCoroutine;
@@ -28,22 +33,47 @@ public class Catchable : MonoBehaviour
         _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
     }
 
-    public virtual void OnCatch()
+    public void OnDrop()
     {
-        Debug.Log($"Catched");
-        OnCatched?.Invoke();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = rb.gravityScale <= 0.0f ? 1.0f : rb.gravityScale;
+    }
+
+    public virtual void OnCatch(Catcher catcher)
+    {
+        if (catcher.MainAction == _requiredAction)
+        {
+            Debug.Log("catched");
+            OnCatched?.Invoke();
+            catcher.SuccessfulCatch();
+        }
+        else
+        {
+            OnMiss();
+            catcher.MissCatch();
+        }
+
+        ClearEventSubscribers();
         StopAllCoroutines();
         Destroy(gameObject);
     }
 
     public virtual void OnMiss()
     {
+        Debug.Log("Missed");
         OnMissed?.Invoke();
     }
 
     public virtual void OnFail()
     {
         OnFailed?.Invoke();
+    }
+
+    protected void ClearEventSubscribers()
+    {
+        OnCatched = null;
+        OnMissed = null;
+        OnFailed = null;
     }
 
     public void OnFocus()

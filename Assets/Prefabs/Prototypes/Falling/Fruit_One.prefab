@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3572976762065359275}
   - component: {fileID: 5278625421958760211}
   m_Layer: 0
-  m_Name: Fruit
+  m_Name: Fruit_One
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,10 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5278625421958760211}
+  _requiredAction: 0
   _colourLerper:
     _defaultColour: {r: 1, g: 1, b: 1, a: 1}
-    _focusColour: {r: 0.2783019, g: 0.51541173, b: 1, a: 1}
-    _transitionDuration: 0.5
+    _focusColour: {r: 0.24705884, g: 0.43921572, b: 0.8313726, a: 1}
+    _transitionDuration: 0.12
 --- !u!58 &6668156222096535550
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class FirstPersonPlayerCamera : PlayerCamera
 {
+    [SerializeField]
+    private FirstPersonMovement _playerMovement;
+
     [Header("Rotation")]
     [SerializeField]
     private Vector2 _mouseSensitivity = Vector2.one;
@@ -24,6 +27,6 @@ public class FirstPersonPlayerCamera : PlayerCamera
     // Update is called once per frame
     void FixedUpdate()
     {
-        player.Rigidbody.MoveRotation(Quaternion.Euler(0.0f, _rotation.y, 0.0f));
+        _playerMovement.Rigidbody.MoveRotation(Quaternion.Euler(0.0f, _rotation.y, 0.0f));
     }
 }

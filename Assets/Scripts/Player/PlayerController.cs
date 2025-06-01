@@ -4,45 +4,35 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IMovementInput
+public class PlayerController : MonoBehaviour
 {
     private PlayerInputActions _playerInputs;
 
-    #region Movement Interface
-    [Header("Movement")]
-    [SerializeField]
-    private Rigidbody _rb;
-    public Rigidbody Rigidbody => _rb;
-
-    [SerializeField]
-    private float _speed = 300.0f;
-
-    [SerializeField]
-    private MovementType _movementApplicationType;
-
     private InputAction _move;
-    public Vector2 MovementDirection => _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
-    public float Speed => _speed;
-    public MovementType ApplicationType => _movementApplicationType;
-    public Transform ReferenceTransform => transform;
-    #endregion
-
     private InputAction _lookAt;
     private InputAction _attack;
+    private InputAction _catchOne;
+    private InputAction _catchTwo;
+    private InputAction _catchThree;
 
     public InputAction MovementInput => _move;
     public InputAction LookInput => _lookAt;
     public InputAction AttackInput => _attack;
+    public InputAction CatchOne => _catchOne;
+    public InputAction CatchTwo => _catchTwo;
+    public InputAction CatchThree => _catchThree;
 
 
     private void Awake()
     {
         _playerInputs = new PlayerInputActions();
-        _rb = GetComponent<Rigidbody>();
 
         _move = _playerInputs.Player.Move;
         _lookAt = _playerInputs.Player.Look;
         _attack = _playerInputs.Player.Attack;
+        _catchOne = _playerInputs.Player.Catch_1;
+        _catchTwo = _playerInputs.Player.Catch_2;
+        _catchThree = _playerInputs.Player.Catch_3;
     }
 
     private void OnEnable()
@@ -50,6 +40,9 @@ public class PlayerController : MonoBehaviour, IMovementInput
         _move.Enable();
         _lookAt.Enable();
         _attack.Enable();
+        _catchOne.Enable();
+        _catchTwo.Enable();
+        _catchThree.Enable();
     }
 
 
@@ -58,13 +51,8 @@ public class PlayerController : MonoBehaviour, IMovementInput
         _move.Disable();
         _lookAt.Disable();
         _attack.Disable();
-    }
-
-    public void SetMovementVelocity(Vector3 velocity)
-    {
-        if (_rb)
-        {
-            _rb.linearVelocity = velocity;
-        }
+        _catchOne.Enable();
+        _catchTwo.Enable();
+        _catchThree.Enable();
     }
 }

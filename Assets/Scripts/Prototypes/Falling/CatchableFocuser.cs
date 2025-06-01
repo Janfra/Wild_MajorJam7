@@ -26,6 +26,8 @@ public class CatchableFocuser : MonoBehaviour
     {
         _focused.OnUnfocus();
         _focused.OnCatched -= ClearFocused;
+        _focused.OnMissed -= ClearFocused;
+        _focused.OnFailed -= ClearFocused;
     }
 
     private void SetAsFocused(Catchable catchable)
@@ -33,10 +35,13 @@ public class CatchableFocuser : MonoBehaviour
         _focused = catchable;
         _focused.OnFocus();
         _focused.OnCatched += ClearFocused;
+        _focused.OnMissed += ClearFocused;
+        _focused.OnFailed += ClearFocused;
     }
 
     private void ClearFocused()
     {
+        UnsetAsFocused();
         _focused = null;
     }
 }

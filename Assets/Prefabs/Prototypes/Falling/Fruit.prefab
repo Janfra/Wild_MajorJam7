@@ -47,6 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9d5a444eb08444ca4ac5d7c3ec339e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 5278625421958760211}
+  _colourLerper:
+    _defaultColour: {r: 1, g: 1, b: 1, a: 1}
+    _focusColour: {r: 0.2783019, g: 0.51541173, b: 1, a: 1}
+    _transitionDuration: 0.5
 --- !u!58 &6668156222096535550
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     [SerializeField]
     private MovementType _applicationType;
 
-    public Vector2 MovementDirection => new Vector2(_player.MovementDirection.x, 0.0f);
+    public Vector2 MovementDirection => new Vector2(_player.MovementInput.ReadValue<Vector2>().x, 0.0f);
 
     public float Speed => _speed;
 

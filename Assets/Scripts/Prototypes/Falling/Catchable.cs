@@ -53,9 +53,7 @@ public class Catchable : MonoBehaviour
             catcher.MissCatch();
         }
 
-        ClearEventSubscribers();
-        StopAllCoroutines();
-        Destroy(gameObject);
+        ClearFruit();
     }
 
     public virtual void OnMiss()
@@ -67,6 +65,7 @@ public class Catchable : MonoBehaviour
     public virtual void OnFail()
     {
         OnFailed?.Invoke();
+        StartCoroutine(ClearFruitAfterTimer());
     }
 
     protected void ClearEventSubscribers()
@@ -91,6 +90,13 @@ public class Catchable : MonoBehaviour
         StartColourTransition();
     }
 
+    private void ClearFruit()
+    {
+        ClearEventSubscribers();
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
+
     private void StartColourTransition()
     {
         if (_colorLerpCoroutine == null)
@@ -110,6 +116,12 @@ public class Catchable : MonoBehaviour
 
         _spriteRenderer.color = _colourLerper.GetColour(Time.deltaTime);
         _colorLerpCoroutine = null;
+    }
+
+    private IEnumerator ClearFruitAfterTimer()
+    {
+        yield return new WaitForSeconds(3.0f);
+        ClearFruit();
     }
 
 }

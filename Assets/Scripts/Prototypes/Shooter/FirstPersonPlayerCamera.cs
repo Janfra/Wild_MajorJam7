@@ -24,6 +24,6 @@ public class FirstPersonPlayerCamera : PlayerCamera
     // Update is called once per frame
     void FixedUpdate()
     {
-        player.MoveTarget.MoveRotation(Quaternion.Euler(0.0f, _rotation.y, 0.0f));
+        player.Rigidbody.MoveRotation(Quaternion.Euler(0.0f, _rotation.y, 0.0f));
     }
 }

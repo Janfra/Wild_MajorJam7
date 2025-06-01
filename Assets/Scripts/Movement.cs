@@ -41,24 +41,20 @@ public class Movement : MonoBehaviour
 
     private void MoveOnDirection()
     {
-        Rigidbody moveTarget = _movementInputProvider.MoveTarget;
-        if (moveTarget == null)
-        {
-            return;
-        }
-
         Vector2 movementDirection = _movementInputProvider.MovementDirection.normalized;
         Vector3 velocity;
+        Transform referenceTransform = _movementInputProvider.ReferenceTransform;
+
         if (_movementInputProvider.ApplicationType == MovementType.FacingDirection)
         {
-            velocity = moveTarget.transform.forward * movementDirection.y + moveTarget.transform.right * movementDirection.x;
+            velocity = referenceTransform.forward * movementDirection.y + referenceTransform.right * movementDirection.x;
         }
         else
         {
             velocity = new Vector3(movementDirection.x, 0.0f, movementDirection.y);
         }
 
-        moveTarget.linearVelocity = velocity * _movementInputProvider.Speed * Time.fixedDeltaTime;
+        _movementInputProvider.SetMovementVelocity(velocity * _movementInputProvider.Speed * Time.fixedDeltaTime);
     }
 
     private void LogInitialiseWarning(Type type)
@@ -71,6 +67,8 @@ public interface IMovementInput
 {
     Vector2 MovementDirection { get; }
     float Speed { get; }
-    Rigidbody MoveTarget { get; }
     MovementType ApplicationType { get; }
+    Transform ReferenceTransform { get; }
+
+    public void SetMovementVelocity(Vector3 velocity);
 }

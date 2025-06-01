@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 {
     [SerializeField]
     private PlayerController _player;
 
     [SerializeField]
-    private Rigidbody _rb;
+    private Rigidbody2D _rb;
 
     [SerializeField]
     private AnimationCurve _speedCurve;
@@ -32,9 +32,9 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 
     public float Speed => _speed;
 
-    public Rigidbody MoveTarget => _rb;
-
     public MovementType ApplicationType => _applicationType;
+
+    public Transform ReferenceTransform => transform;
 
     private float _progress = 0.0f;
     private bool _isAccelerating = false;
@@ -43,7 +43,7 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     {
         if (_rb == null)
         {
-            _rb = GetComponent<Rigidbody>();
+            _rb = GetComponent<Rigidbody2D>();
         }
     }
 
@@ -78,5 +78,10 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     private void StartAccelerating(InputAction.CallbackContext context)
     {
         _isAccelerating = true;
+    }
+
+    public void SetMovementVelocity(Vector3 velocity)
+    {
+        _rb.linearVelocity = velocity;
     }
 }

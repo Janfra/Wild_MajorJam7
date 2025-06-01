@@ -1,0 +1,42 @@
+using UnityEngine;
+
+[RequireComponent(typeof(BoxCollider2D))]
+public class CatchableFocuser : MonoBehaviour
+{
+    private Catchable _focused;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Catchable catchable = collision.gameObject.GetComponent<Catchable>();
+        if (catchable && catchable != _focused)
+        {
+            if (_focused == null)
+            {
+                SetAsFocused(catchable);
+            }
+            else if (catchable.transform.position.y < _focused.transform.position.y)
+            {
+                UnsetAsFocused();
+                SetAsFocused(catchable);
+            }
+        }
+    }
+
+    private void UnsetAsFocused()
+    {
+        _focused.OnUnfocus();
+        _focused.OnCatched -= ClearFocused;
+    }
+
+    private void SetAsFocused(Catchable catchable)
+    {
+        _focused = catchable;
+        _focused.OnFocus();
+        _focused.OnCatched += ClearFocused;
+    }
+
+    private void ClearFocused()
+    {
+        _focused = null;
+    }
+}

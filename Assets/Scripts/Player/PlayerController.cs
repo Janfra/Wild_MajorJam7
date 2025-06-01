@@ -4,7 +4,6 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour, IMovementInput
 {
     private PlayerInputActions _playerInputs;
@@ -13,6 +12,7 @@ public class PlayerController : MonoBehaviour, IMovementInput
     [Header("Movement")]
     [SerializeField]
     private Rigidbody _rb;
+    public Rigidbody Rigidbody => _rb;
 
     [SerializeField]
     private float _speed = 300.0f;
@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour, IMovementInput
     private InputAction _move;
     public Vector2 MovementDirection => _move != null ? _move.ReadValue<Vector2>() : Vector2.zero;
     public float Speed => _speed;
-    public Rigidbody MoveTarget => _rb;
     public MovementType ApplicationType => _movementApplicationType;
+    public Transform ReferenceTransform => transform;
     #endregion
 
     private InputAction _lookAt;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour, IMovementInput
     public InputAction MovementInput => _move;
     public InputAction LookInput => _lookAt;
     public InputAction AttackInput => _attack;
+
 
     private void Awake()
     {
@@ -57,5 +58,13 @@ public class PlayerController : MonoBehaviour, IMovementInput
         _move.Disable();
         _lookAt.Disable();
         _attack.Disable();
+    }
+
+    public void SetMovementVelocity(Vector3 velocity)
+    {
+        if (_rb)
+        {
+            _rb.linearVelocity = velocity;
+        }
     }
 }

@@ -8,6 +8,7 @@ public enum CatcherActions
     One,
     Two,
     Three,
+    Four,
     None,
 }
 
@@ -22,15 +23,23 @@ public struct CatchActionState
     public int ActivationIndex;
 }
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider))]
 public class Catcher : MonoBehaviour
 {
+    public delegate void CatchActionUpdate(CatcherActions action);
+    public event CatchActionUpdate OnActive;
+    public event CatchActionUpdate OnInactive;
+    public event CatchActionUpdate OnMain;
+
     [SerializeField]
     private PlayerController _player;
 
     [SerializeField]
     ParticleSystem _catchParticle;
     private ParticleSystem.MainModule _mainModule;
+
+    [SerializeField]
+    private CatchActionsUIDataContainer _actionsUIDataContainer;
 
     public CatcherActions MainAction => _currentMainAction;
     private CatcherActions _currentMainAction = CatcherActions.None;
@@ -43,6 +52,15 @@ public class Catcher : MonoBehaviour
         {
             throw new System.NullReferenceException($"The Catcher ({name}), has no player controller assigned to it. Please assign it.");
         }
+
+        if (_actionsUIDataContainer)
+        {
+            _actionsUIDataContainer.SetDataProvider(this);
+        }
+        else
+        {
+            Debug.LogError($"The UI data container has not been set. Skipping it on {name}");
+        }
     }
 
     private void Start()
@@ -50,9 +68,11 @@ public class Catcher : MonoBehaviour
         _player.CatchOne.started += OnCatchActionOne;
         _player.CatchTwo.started += OnCatchActionTwo;
         _player.CatchThree.started += OnCatchActionThree;
+        _player.CatchFour.started += OnCatchActionFour;
         _player.CatchOne.canceled += OnCancelCatchActionOne;
         _player.CatchTwo.canceled += OnCancelCatchActionTwo;
         _player.CatchThree.canceled += OnCancelCatchActionThree;
+        _player.CatchFour.canceled += OnCancelCatchActionFour;
     }
 
     public bool IsActionActive(CatcherActions action)
@@ -97,6 +117,11 @@ public class Catcher : MonoBehaviour
         SetActionToActive(CatcherActions.Three);
     }
 
+    private void OnCatchActionFour(InputAction.CallbackContext context)
+    {
+        SetActionToActive(CatcherActions.Four);
+    }
+
     private void OnCancelCatchActionOne(InputAction.CallbackContext context)
     {
         SetActionToInactive(CatcherActions.One);
@@ -112,20 +137,27 @@ public class Catcher : MonoBehaviour
         SetActionToInactive(CatcherActions.Three);
     }
 
+    private void OnCancelCatchActionFour(InputAction.CallbackContext context)
+    {
+        SetActionToInactive(CatcherActions.Four);
+    }
+
     private void SetActionToActive(CatcherActions action)
     {
         _currentMainAction = action;
         _activationCount++;
         CatchActionState state = new CatchActionState(_activationCount);
         _activeActions[action] = state;
+        OnActive?.Invoke(action);
+        OnMain?.Invoke(action);
     }
 
     private void SetActionToInactive(CatcherActions action)
     {
         CatchActionState state = new CatchActionState(-1);
         _activeActions[action] = state;
+        OnInactive?.Invoke(action);
 
-        
         int activationIndex = 0;
         foreach (var pair in _activeActions)
         {
@@ -141,9 +173,13 @@ public class Catcher : MonoBehaviour
             _currentMainAction = CatcherActions.None;
             _activationCount = 0;
         }
+        else
+        {
+            OnMain?.Invoke(_currentMainAction);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         Catchable catchable = collision.gameObject.GetComponent<Catchable>();
         if (catchable)

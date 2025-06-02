@@ -1,11 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider))]
 public class CatchableFocuser : MonoBehaviour
 {
     private Catchable _focused;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         Catchable catchable = collision.gameObject.GetComponent<Catchable>();
         if (catchable && catchable != _focused)

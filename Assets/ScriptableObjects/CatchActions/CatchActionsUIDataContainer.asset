@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2058a50a61eba946979d8ea571f2330, type: 3}
+  m_Name: CatchActionsUIDataContainer
+  m_EditorClassIdentifier: 
+  _targets:
+  - {fileID: 11400000, guid: c3bd84bab4d2a1e499dcc9f72e455b36, type: 2}
+  - {fileID: 11400000, guid: 8dff510406f0cb742ab8314789fe5885, type: 2}
+  - {fileID: 11400000, guid: e89e28b68e1e2a045a7bbf9e25bbbab6, type: 2}
+  - {fileID: 11400000, guid: 36a3d311070ac7e48a52bf81edf3c75d, type: 2}

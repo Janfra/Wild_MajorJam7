@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D), typeof(Rigidbody2D))]
+[RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
 public class Catchable : MonoBehaviour
 {
     public delegate void CatchableAction();
@@ -36,8 +36,8 @@ public class Catchable : MonoBehaviour
 
     public void OnDrop(CatchActionAssociatedData requiredAction)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = rb.gravityScale <= 0.0f ? 1.0f : rb.gravityScale;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.useGravity = true;
 
         if (requiredAction != null)
         {
@@ -71,6 +71,10 @@ public class Catchable : MonoBehaviour
 
     public virtual void OnFail()
     {
+        gameObject.layer = 8 << 1;
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(((Vector3.forward * 1.3f) + Vector3.up).normalized * 4.0f, ForceMode.Impulse);
+
         OnFailed?.Invoke();
         StartCoroutine(ClearFruitAfterTimer());
     }

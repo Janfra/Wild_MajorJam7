@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 {
     [SerializeField]
     private PlayerController _player;
 
     [SerializeField]
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
 
     [SerializeField]
     private AnimationCurve _speedCurve;
@@ -43,7 +43,7 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     {
         if (_rb == null)
         {
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = GetComponent<Rigidbody>();
         }
     }
 

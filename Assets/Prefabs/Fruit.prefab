@@ -52,6 +52,9 @@ MonoBehaviour:
   _colourLerper:
     _defaultColour: {r: 1, g: 1, b: 1, a: 1}
     _transitionDuration: 0.12
+  _failLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!212 &5278625421958760211
 SpriteRenderer:
   m_ObjectHideFlags: 0

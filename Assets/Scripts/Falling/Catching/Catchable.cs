@@ -19,6 +19,9 @@ public class Catchable : MonoBehaviour
 
     [SerializeField]
     private ColorSwap _colourLerper;
+
+    private const int _FailLayer = 8;
+
     private Coroutine _colorLerpCoroutine;
     private IEnumerator _lerpMethod;
 
@@ -71,7 +74,7 @@ public class Catchable : MonoBehaviour
 
     public virtual void OnFail()
     {
-        gameObject.layer = 8 << 1;
+        gameObject.layer = _FailLayer;
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(((Vector3.forward * 1.3f) + Vector3.up).normalized * 4.0f, ForceMode.Impulse);
 

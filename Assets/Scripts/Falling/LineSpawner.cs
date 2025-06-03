@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class LineSpawner : MonoBehaviour
 {
+    [Header("Enable Configuration")]
+    [SerializeField]
+    private bool _isEnabledOnStart = false;
+
+    [SerializeField]
+    private GameEvent _enableOnEvent;
+
+    [Header("Spawn Configuration")]
     [SerializeField]
     private Vector2 _spawnXRange;
     
@@ -24,16 +32,36 @@ public class LineSpawner : MonoBehaviour
     {
         VerifyArray(_prefabOptions);
         VerifyArray(_possibleActions);
+
+        _spawnTimer.SubscribeToCallback(Spawn);
+
+        if (_enableOnEvent)
+        {
+            _enableOnEvent.OnEvent += EnableSpawner;
+        }
     }
 
     private void Start()
     {
-        _spawnTimer.SubscribeToCallback(Spawn);
+        if (!_isEnabledOnStart)
+        {
+            DisableSpawner();
+        }
     }
 
     private void Update()
     {
         _spawnTimer.IsTimerTickOnTarget(false);
+    }
+
+    private void EnableSpawner()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void DisableSpawner()
+    {
+        gameObject.SetActive(false);
     }
 
     private void Spawn()

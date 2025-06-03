@@ -18,8 +18,15 @@ public class CatchActionUI : MonoBehaviour
 
     private void Start()
     {
-        _colourDisplay.color = _actionColor;
-        _highlightBorder.color = _actionColor;
+        if (_colourDisplay)
+        {
+            _colourDisplay.color = _actionColor;
+        }
+
+        if (_highlightBorder)
+        {
+            _highlightBorder.color = _actionColor;
+        }
 
         _actionData.OnActiveStateChanged += UpdateHighlightBorder;
         _actionData.OnIsMainActionChanged += UpdateUIMainAction;
@@ -59,16 +66,25 @@ public class CatchActionUI : MonoBehaviour
 
     private void HighlightToMain()
     {
-        _highlightBorder.color = Color.white;
+        if (_highlightBorder)
+        {
+            _highlightBorder.color = Color.white;
+        }
     }
 
     private void HighlightToActive()
     {
-        _highlightBorder.color = Color.black;
+        if (_highlightBorder)
+        {
+            _highlightBorder.color = Color.black;
+        }
     }
 
     private void UndoHighlight()
     {
-        _highlightBorder.color = _actionColor;
+        if (_highlightBorder)
+        {
+            _highlightBorder.color = _actionColor;
+        }
     }
 }

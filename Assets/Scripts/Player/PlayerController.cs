@@ -3,6 +3,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    private bool _isEnabledOnStart;
+
+    [SerializeField]
+    private GameEvent _enableOnEvent;
+
     private PlayerInputActions _playerInputs;
 
     private InputAction _move;
@@ -33,9 +39,33 @@ public class PlayerController : MonoBehaviour
         _catchTwo = _playerInputs.Player.Catch_2;
         _catchThree = _playerInputs.Player.Catch_3;
         _catchFour = _playerInputs.Player.Catch_4;
+
+        if (_enableOnEvent)
+        {
+            _enableOnEvent.OnEvent += EnableAllInputs;
+        }
+    }
+
+    private void Start()
+    {
+        if (!_isEnabledOnStart)
+        {
+            DisableAllInputs();
+        }
     }
 
     private void OnEnable()
+    {
+        EnableAllInputs();
+    }
+
+
+    private void OnDisable()
+    {
+        DisableAllInputs();
+    }
+
+    private void EnableAllInputs()
     {
         _move.Enable();
         _lookAt.Enable();
@@ -46,8 +76,7 @@ public class PlayerController : MonoBehaviour
         _catchFour.Enable();
     }
 
-
-    private void OnDisable()
+    private void DisableAllInputs()
     {
         _move.Disable();
         _lookAt.Disable();

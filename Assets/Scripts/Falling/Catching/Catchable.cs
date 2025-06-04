@@ -24,7 +24,7 @@ public class Catchable : MonoBehaviour
 
     private Coroutine _colorLerpCoroutine;
     private IEnumerator _lerpMethod;
-
+    private float _bounceModifier = 0.0f;
 
     private void Awake()
     {
@@ -76,7 +76,8 @@ public class Catchable : MonoBehaviour
     {
         gameObject.layer = _FailLayer;
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(((Vector3.forward * 1.3f) + Vector3.up).normalized * 4.0f, ForceMode.Impulse);
+        rb.AddForce(((Vector3.forward * (1.3f - _bounceModifier)) + Vector3.up).normalized * 6.0f, ForceMode.Impulse);
+        _bounceModifier = 0.2f;
 
         OnFailed?.Invoke();
         StartCoroutine(ClearFruitAfterTimer());

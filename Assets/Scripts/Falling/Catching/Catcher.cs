@@ -41,6 +41,9 @@ public class Catcher : MonoBehaviour
     [SerializeField]
     private CatchActionsUIDataContainer _actionsUIDataContainer;
 
+    [SerializeField]
+    private FMODEvent _catchAudio;
+
     public CatcherActions MainAction => _currentMainAction;
     private CatcherActions _currentMainAction = CatcherActions.None;
     private Dictionary<CatcherActions, CatchActionState> _activeActions = new Dictionary<CatcherActions, CatchActionState>();
@@ -90,6 +93,7 @@ public class Catcher : MonoBehaviour
 
     public void SuccessfulCatch()
     {
+        _catchAudio.PlayOneshot(transform.position);
         _mainModule = _catchParticle.main;
         _mainModule.startColor = Color.green;
         _catchParticle.Play();

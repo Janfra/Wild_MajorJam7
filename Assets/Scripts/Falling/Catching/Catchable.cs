@@ -25,6 +25,7 @@ public class Catchable : MonoBehaviour
     private Coroutine _colorLerpCoroutine;
     private IEnumerator _lerpMethod;
     private float _bounceModifier = 0.0f;
+    private ScreenMarkerTrackerHandle _offscreenTrackerHandle;
 
     private void Awake()
     {
@@ -35,6 +36,11 @@ public class Catchable : MonoBehaviour
 
         _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         _colourLerper.SetFocusColour(_requiredAction);
+    }
+
+    private void Start()
+    {
+        _offscreenTrackerHandle = OffscreenMarkers.Instance.TrackWithMarkerWhileOffscreen(transform);
     }
 
     public void OnDrop(CatchActionAssociatedData requiredAction)
@@ -137,6 +143,14 @@ public class Catchable : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         ClearFruit();
+    }
+
+    private void OnDestroy()
+    {
+        if (_offscreenTrackerHandle.IsValid)
+        {
+            OffscreenMarkers.Instance.ReleaseScreenTracker(_offscreenTrackerHandle);
+        }
     }
 
 }

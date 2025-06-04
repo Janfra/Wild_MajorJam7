@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField]
-    private AudioMixer _audioMixer;
+    private FMODBus _masterVolume;
 
     [SerializeField]
     private Slider _audioVolume;
@@ -37,17 +36,12 @@ public class SettingsMenu : MonoBehaviour
     {
         float volume = PlayerPrefs.GetFloat(_masterVolumeName, 0.75f); ;
         _audioVolume.value = volume;
-        _audioMixer.SetFloat(_masterVolumeName, GetSliderValueAsVolume(volume));
+        _masterVolume.SetBusVolume(volume);
     }
 
     public void UpdateGameVolume(float volume)
     {
-        if (!_audioMixer)
-        {
-            return;
-        }
-
-        _audioMixer.SetFloat(_masterVolumeName, GetSliderValueAsVolume(volume));
+        _masterVolume.SetBusVolume(volume);
         PlayerPrefs.SetFloat(_masterVolumeName, volume);
     }
 

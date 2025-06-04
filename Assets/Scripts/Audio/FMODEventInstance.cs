@@ -16,6 +16,11 @@ public class FMODEventInstance : ScriptableObject
             return;
         }
 
+        if (_audioEventInstance.isValid())
+        {
+            return;
+        }
+
         EventInstance audioInstance = RuntimeManager.CreateInstance(_audioEvent.Event);
         _audioEventInstance = audioInstance;
     }
@@ -35,12 +40,13 @@ public class FMODEventInstance : ScriptableObject
     {
         if (!_audioEventInstance.isValid())
         {
+            Debug.LogWarning($"Cant start looping audio, event instance was not created for {name}");
             return;
         }
 
         PLAYBACK_STATE playbackState;
         _audioEventInstance.getPlaybackState(out playbackState);
-        if (playbackState == PLAYBACK_STATE.STOPPING)
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
         {
             _audioEventInstance.start();
         }

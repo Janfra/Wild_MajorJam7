@@ -20,7 +20,7 @@ public class CatchActionUI : MonoBehaviour
     {
         if (_colourDisplay)
         {
-            _colourDisplay.color = _actionColor;
+            _colourDisplay.color = Color.white;
         }
 
         if (_highlightBorder)
@@ -84,7 +84,7 @@ public class CatchActionUI : MonoBehaviour
     {
         if (_highlightBorder)
         {
-            _highlightBorder.color = _actionColor;
+            _highlightBorder.color = Color.whiteSmoke;
         }
     }
 }

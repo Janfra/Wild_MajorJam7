@@ -3859,8 +3859,8 @@
     "m_ObjectId": "834922b3901c41ad86b1327368f5c6bc",
     "m_Title": "Remove soft outline",
     "m_Position": {
-        "x": -1152.9998779296875,
-        "y": -136.00003051757813
+        "x": -1153.0,
+        "y": -136.0
     }
 }
 
@@ -4235,7 +4235,7 @@
     "m_ObjectId": "956c019dcb7a4fe1b28910c03b2d94d6",
     "m_Title": "Overlay",
     "m_Position": {
-        "x": -4570.99951171875,
+        "x": -4571.0,
         "y": -2943.0
     }
 }
@@ -4941,8 +4941,8 @@
     "m_ObjectId": "b4ee411ccb6a4a8bb70a91b77fa2eaf2",
     "m_Title": "Outline",
     "m_Position": {
-        "x": -3260.999755859375,
-        "y": 612.0000610351563
+        "x": -3261.0,
+        "y": 612.0
     }
 }
 

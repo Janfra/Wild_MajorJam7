@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 384265303446094414}
-  _rb: {fileID: 0}
+  _rb: {fileID: 248172597746449141}
   _speedCurve:
     serializedVersion: 2
     m_Curve:
@@ -90,6 +90,7 @@ MonoBehaviour:
   _maxSpeed: 600
   _accelerationMultiplier: 2
   _deccelerationMultiplier: 4
+  _Bounds: {x: -5.15, y: 5.15}
   _applicationType: 1
 --- !u!114 &384265303446094414
 MonoBehaviour:
@@ -304,6 +305,7 @@ MonoBehaviour:
   _player: {fileID: 384265303446094414}
   _catchParticle: {fileID: 6458208351336391416}
   _actionsUIDataContainer: {fileID: 11400000, guid: d06e38a53382d7c488f3bf30d2bf47c0, type: 2}
+  _catchAudio: {fileID: 0}
 --- !u!198 &6458208351336391416
 ParticleSystem:
   m_ObjectHideFlags: 0

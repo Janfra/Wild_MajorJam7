@@ -3378,7 +3378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isEnabledOnStart: 0
   _enableOnEvent: {fileID: 11400000, guid: 3674aa04f597ffc4cb3cfc575f4037f6, type: 2}
-  _spawnXRange: {x: -5.5, y: 5.5}
+  _spawnXRange: {x: -5.15, y: 5.15}
   _spawnHeight: 6
   _spawnDepth: 1.86
   _prefabOptions:
@@ -3512,10 +3512,6 @@ PrefabInstance:
     - target: {fileID: 384265303446094414, guid: 230c01b64b452994482daed3dc3358c9, type: 3}
       propertyPath: _isEnabledOnStart
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1754683624791471161, guid: 230c01b64b452994482daed3dc3358c9, type: 3}
-      propertyPath: _rb
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2913250574039955232, guid: 230c01b64b452994482daed3dc3358c9, type: 3}
       propertyPath: _catchAudio

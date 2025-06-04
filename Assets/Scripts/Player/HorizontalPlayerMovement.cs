@@ -23,7 +23,8 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     [SerializeField, Range(0.1f, 5.0f)]
     private float _deccelerationMultiplier = 1.0f;
 
-    private float _speed;
+    [SerializeField]
+    private Vector2 _Bounds;
 
     [SerializeField]
     private MovementType _applicationType;
@@ -36,6 +37,7 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 
     public Transform ReferenceTransform => transform;
 
+    private float _speed;
     private float _progress = 0.0f;
     private bool _isAccelerating = false;
 
@@ -82,6 +84,15 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 
     public void SetMovementVelocity(Vector3 velocity)
     {
+        Vector3 futurePosition = transform.position + (velocity * Time.fixedDeltaTime);
+        if (futurePosition.x <= _Bounds.x || futurePosition.x >= _Bounds.y)
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _progress *= 0.5f;
+            _isAccelerating = false;
+            return;
+        }
+
         _rb.linearVelocity = velocity;
     }
 }

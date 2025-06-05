@@ -10,7 +10,7 @@ public class FMODEvent : ScriptableObject
 
     public bool IsValid => !_audioEvent.IsNull;
     
-    public void PlayOneshot(Vector3 position)
+    public void PlayOneshot(Vector3 position = default)
     {
         if (!IsEventUsable())
         {

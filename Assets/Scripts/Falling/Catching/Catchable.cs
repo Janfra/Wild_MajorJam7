@@ -3,22 +3,21 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider), typeof(FallMovement))]
-public class Catchable : MonoBehaviour
+public class Catchable : MonoBehaviour, ISoundEmitter
 {
     public delegate void CatchableAction();
     public event CatchableAction OnCatched;
     public event CatchableAction OnMissed;
     public event CatchableAction OnFailed;
 
+    public event ISoundEmitter.EmitAction OnStartEmitting;
+    public event ISoundEmitter.EmitAction OnStopEmitting;
+
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField]
     private Rigidbody _rb;
-
-
-    [SerializeField]
-    private ColorSwap _colourLerper;
 
     private const int _FailLayer = 8;
 
@@ -54,8 +53,6 @@ public class Catchable : MonoBehaviour
         {
             _requiredAction = requiredAction.Action;
             _spriteRenderer.sprite = requiredAction.FruitSprite;
-
-            _colourLerper.SetFocusColour(requiredAction);
         }
     }
 
@@ -95,6 +92,7 @@ public class Catchable : MonoBehaviour
 
     public void OnBounce()
     {
+        OnStartEmitting?.Invoke();
         _rb.AddForce(((Vector3.forward * (1.3f - _bounceModifier)) + Vector3.up).normalized * 6.0f, ForceMode.Impulse);
         _bounceModifier = 0.2f;
     }
@@ -125,29 +123,30 @@ public class Catchable : MonoBehaviour
     {
         ClearEventSubscribers();
         StopAllCoroutines();
+        OnStopEmitting?.Invoke();
         Destroy(gameObject);
     }
 
-    private void StartColourTransition()
-    {
-        if (_colorLerpCoroutine == null)
-        {
-            _lerpMethod = ChangeColour();
-            _colorLerpCoroutine = StartCoroutine(_lerpMethod);
-        }
-    }
+    //private void StartColourTransition()
+    //{
+    //    if (_colorLerpCoroutine == null)
+    //    {
+    //        _lerpMethod = ChangeColour();
+    //        _colorLerpCoroutine = StartCoroutine(_lerpMethod);
+    //    }
+    //}
 
-    private IEnumerator ChangeColour()
-    {
-        while (!_colourLerper.IsCompleted())
-        {
-            _spriteRenderer.color = _colourLerper.GetColour(Time.deltaTime);
-            yield return null;
-        }
+    //private IEnumerator ChangeColour()
+    //{
+    //    while (!_colourLerper.IsCompleted())
+    //    {
+    //        _spriteRenderer.color = _colourLerper.GetColour(Time.deltaTime);
+    //        yield return null;
+    //    }
 
-        _spriteRenderer.color = _colourLerper.GetColour(Time.deltaTime);
-        _colorLerpCoroutine = null;
-    }
+    //    _spriteRenderer.color = _colourLerper.GetColour(Time.deltaTime);
+    //    _colorLerpCoroutine = null;
+    //}
 
     private IEnumerator ClearFruitAfterTimer()
     {

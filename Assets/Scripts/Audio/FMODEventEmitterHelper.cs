@@ -9,12 +9,19 @@ public class FMODEventEmitterHelper : MonoBehaviour
 
     [SerializeField]
     private StudioEventEmitter _emitter;
+    private ISoundEmitter _emitterNotifier;
 
-    [SerializeField]
-    private GameEvent _startEvent;
-
-    [SerializeField]
-    private GameEvent _endEvent;
+    private void OnValidate()
+    {
+        if (!_emitter)
+        {
+            _emitter = GetComponent<StudioEventEmitter>();
+            if (_audioEvent)
+            {
+                _emitter.EventReference = _audioEvent.Event;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -28,14 +35,11 @@ public class FMODEventEmitterHelper : MonoBehaviour
             _emitter.EventReference = _audioEvent.Event;
         }
 
-        if (_startEvent) 
+        _emitterNotifier = GetComponent<ISoundEmitter>();
+        if (_emitterNotifier != null) 
         {
-            _startEvent.OnEvent += StartPlaying;
-        }
-
-        if (_endEvent)
-        {
-            _endEvent.OnEvent += StopPlaying;
+            _emitterNotifier.OnStartEmitting += StartPlaying;
+            _emitterNotifier.OnStopEmitting += StartPlaying;
         }
     }
 
@@ -53,4 +57,11 @@ public class FMODEventEmitterHelper : MonoBehaviour
     {
         StopPlaying();
     }
+}
+
+public interface ISoundEmitter
+{
+    public delegate void EmitAction();
+    public event EmitAction OnStartEmitting;
+    public event EmitAction OnStopEmitting;
 }

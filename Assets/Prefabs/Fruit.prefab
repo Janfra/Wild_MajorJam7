@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1606844844621408925}
   - component: {fileID: 146037229459028915}
   - component: {fileID: 8386932071503569100}
+  - component: {fileID: 7941123751658554810}
+  - component: {fileID: 2599389917519649694}
   m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
@@ -51,10 +53,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5278625421958760211}
   _rb: {fileID: 1606844844621408925}
-  _requiredAction: {fileID: 11400000, guid: 838e7da17c684974c87f9a50b82231d9, type: 2}
-  _colourLerper:
-    _defaultColour: {r: 1, g: 1, b: 1, a: 1}
-    _transitionDuration: 0.12
 --- !u!212 &5278625421958760211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -184,3 +182,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fallSpeed: 140
   _rb: {fileID: 1606844844621408925}
+--- !u!114 &7941123751658554810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896135267119018251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1403877461
+      Data2: 1328436336
+      Data3: 1725625253
+      Data4: -1628711364
+    Path: event:/Fruit Bounce
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &2599389917519649694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896135267119018251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015b50c35f636ff42911880d81ebdf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioEvent: {fileID: 11400000, guid: a37587c6986922543b666c06eb8d2557, type: 2}
+  _emitter: {fileID: 7941123751658554810}

@@ -30,7 +30,7 @@ public class PlayerScore : ScriptableObject
     {
         _playerScore = Mathf.Clamp(score, 0, Mathf.Infinity);
         OnScoreUpdate?.Invoke(score);
-        if (_playerScore >= _currentLevel.NextLevelRequiredScore)
+        if (_playerScore >= _levelUpNotifier.RequiredScoreForNextLevelUp)
         {
             if (_currentLevel.NextLevel)
             {

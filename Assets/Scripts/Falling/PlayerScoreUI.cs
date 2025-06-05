@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,14 @@ public class PlayerScoreUI : MonoBehaviour
     [SerializeField]
     private LevelUpNotifier _levelUpNotifier;
 
+    [SerializeField]
+    private TMP_Text _scoreText;
+
     private void Awake()
     {
         if (_playerScore)
         {
-            _playerScore.OnScoreUpdate += UpdateSlider;
+            _playerScore.OnScoreUpdate += UpdateScoreDisplay;
         }
 
         if (!_progressSlider)
@@ -35,7 +39,7 @@ public class PlayerScoreUI : MonoBehaviour
     private void UpdateUI(LevelData newLevel)
     {
         _progressSlider.minValue = 0.0f;
-        _progressSlider.maxValue = newLevel.NextLevelRequiredScore;
+        _progressSlider.maxValue = _levelUpNotifier.RequiredScoreForNextLevelUp;
         _progressSlider.value = _progressSlider.value;
     }
 
@@ -44,8 +48,12 @@ public class PlayerScoreUI : MonoBehaviour
         _progressSlider.value = 0;
     }
 
-    private void UpdateSlider(float score)
+    private void UpdateScoreDisplay(float score)
     {
         _progressSlider.value = score;
+        if (_scoreText)
+        {
+            _scoreText.text = score.ToString();
+        }
     }
 }

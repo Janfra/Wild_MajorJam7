@@ -1,5 +1,6 @@
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 [CreateAssetMenu(fileName = "FMODEvent", menuName = "Scriptable Objects/FMODEvent")]
 public class FMODEvent : ScriptableObject
@@ -7,6 +8,9 @@ public class FMODEvent : ScriptableObject
     [SerializeField]
     private EventReference _audioEvent;
     public EventReference Event => _audioEvent;
+
+    private EventDescription _eventDescription;
+    public EventDescription EventDescription => GetEventDescription();
 
     public bool IsValid => !_audioEvent.IsNull;
     
@@ -29,5 +33,10 @@ public class FMODEvent : ScriptableObject
         }
 
         return true;
+    }
+
+    public EventDescription GetEventDescription()
+    {
+        return _eventDescription.isValid() ? _eventDescription : _eventDescription = RuntimeManager.GetEventDescription(_audioEvent);
     }
 }

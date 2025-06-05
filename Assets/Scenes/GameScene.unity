@@ -5495,6 +5495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _music: {fileID: 11400000, guid: 9e07863c1d0fd1d439b253f9b110d159, type: 2}
+  _startMusicParameterName: MusicStage
+  _gameStarted: {fileID: 11400000, guid: 3674aa04f597ffc4cb3cfc575f4037f6, type: 2}
 --- !u!1 &1386019597 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3959259893744247587, guid: 7b66e027a9703b848861961a2022aa52, type: 3}

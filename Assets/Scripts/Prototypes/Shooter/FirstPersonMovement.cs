@@ -18,7 +18,7 @@ public class FirstPersonMovement : MonoBehaviour, IMovementInput
 
     [SerializeField]
     private MovementType _movementApplicationType;
-    public Vector2 MovementDirection => _player.MovementInput != null ? _player.MovementInput.ReadValue<Vector2>() : Vector2.zero;
+    public Vector3 MovementDirection => GetMovementDirection();
     public float Speed => _speed;
     public MovementType ApplicationType => _movementApplicationType;
     public Transform ReferenceTransform => transform;
@@ -35,5 +35,11 @@ public class FirstPersonMovement : MonoBehaviour, IMovementInput
         {
             _rb.linearVelocity = velocity;
         }
+    }
+
+    private Vector3 GetMovementDirection()
+    {
+        Vector2 input = _player.MovementInput.ReadValue<Vector2>();
+        return new Vector3(input.x, 0.0f, input.y);
     }
 }

@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider), typeof(FallMovement))]
 public class Catchable : MonoBehaviour
 {
     public delegate void CatchableAction();
@@ -13,6 +12,9 @@ public class Catchable : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+
+    [SerializeField]
+    private Rigidbody _rb;
 
     [SerializeField]
     private CatchActionAssociatedData _requiredAction;
@@ -34,6 +36,11 @@ public class Catchable : MonoBehaviour
             _spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        if (!_rb)
+        {
+            _rb = GetComponent<Rigidbody>();
+        } 
+
         _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         _colourLerper.SetFocusColour(_requiredAction);
     }
@@ -45,9 +52,6 @@ public class Catchable : MonoBehaviour
 
     public void OnDrop(CatchActionAssociatedData requiredAction)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.useGravity = true;
-
         if (requiredAction != null)
         {
             _requiredAction = requiredAction;
@@ -80,13 +84,19 @@ public class Catchable : MonoBehaviour
 
     public virtual void OnFail()
     {
-        gameObject.layer = _FailLayer;
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(((Vector3.forward * (1.3f - _bounceModifier)) + Vector3.up).normalized * 6.0f, ForceMode.Impulse);
-        _bounceModifier = 0.2f;
+        Movement movement = GetComponent<Movement>();
+        movement.enabled = false;
+        _rb.useGravity = true;
 
+        gameObject.layer = _FailLayer;
         OnFailed?.Invoke();
         StartCoroutine(ClearFruitAfterTimer());
+    }
+
+    public void OnBounce()
+    {
+        _rb.AddForce(((Vector3.forward * (1.3f - _bounceModifier)) + Vector3.up).normalized * 6.0f, ForceMode.Impulse);
+        _bounceModifier = 0.2f;
     }
 
     protected void ClearEventSubscribers()

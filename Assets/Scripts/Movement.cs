@@ -41,17 +41,17 @@ public class Movement : MonoBehaviour
 
     private void MoveOnDirection()
     {
-        Vector2 movementDirection = _movementInputProvider.MovementDirection.normalized;
+        Vector3 movementDirection = _movementInputProvider.MovementDirection.normalized;
         Vector3 velocity;
         Transform referenceTransform = _movementInputProvider.ReferenceTransform;
 
         if (_movementInputProvider.ApplicationType == MovementType.FacingDirection)
         {
-            velocity = referenceTransform.forward * movementDirection.y + referenceTransform.right * movementDirection.x;
+            velocity = referenceTransform.forward * movementDirection.y + referenceTransform.right * movementDirection.x + movementDirection.z * (-referenceTransform.up);
         }
         else
         {
-            velocity = new Vector3(movementDirection.x, 0.0f, movementDirection.y);
+            velocity = movementDirection;
         }
 
         _movementInputProvider.SetMovementVelocity(velocity * _movementInputProvider.Speed * Time.fixedDeltaTime);
@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
 
 public interface IMovementInput
 {
-    Vector2 MovementDirection { get; }
+    Vector3 MovementDirection { get; }
     float Speed { get; }
     MovementType ApplicationType { get; }
     Transform ReferenceTransform { get; }

@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5278625421958760211}
   - component: {fileID: 7366771542617906983}
   - component: {fileID: 1606844844621408925}
+  - component: {fileID: 146037229459028915}
+  - component: {fileID: 8386932071503569100}
   m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
@@ -48,13 +50,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5278625421958760211}
+  _rb: {fileID: 1606844844621408925}
   _requiredAction: {fileID: 11400000, guid: 838e7da17c684974c87f9a50b82231d9, type: 2}
   _colourLerper:
     _defaultColour: {r: 1, g: 1, b: 1, a: 1}
     _transitionDuration: 0.12
-  _failLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!212 &5278625421958760211
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,8 +153,34 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &146037229459028915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896135267119018251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f70db0a10a695aa49891dcfa0094382f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8386932071503569100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896135267119018251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30e9b0817bc4fd140ac050736aa1354f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fallSpeed: 140
+  _rb: {fileID: 1606844844621408925}

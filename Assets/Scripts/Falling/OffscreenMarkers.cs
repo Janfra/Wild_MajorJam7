@@ -156,7 +156,10 @@ public class OffscreenMarkers : MonoBehaviour
 
         ScreenMarkerTracker tracker = _markers[handle.Handle];
         tracker.Target = null;
-        tracker.Marker.gameObject.SetActive(false);
+        if (tracker.Marker)
+        {
+            tracker.Marker.gameObject.SetActive(false);
+        }
 
         _availableMarkers.Enqueue(tracker);
         _activeMarkers.Remove(tracker);

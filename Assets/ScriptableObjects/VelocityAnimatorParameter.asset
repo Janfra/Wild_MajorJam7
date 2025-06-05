@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8d571325069464b892bfd26426c4bd, type: 3}
-  m_Name: MarkerSettings
+  m_Script: {fileID: 11500000, guid: dc9f4de7304e80343bc17a80ae82722d, type: 3}
+  m_Name: VelocityAnimatorParameter
   m_EditorClassIdentifier: 
-  _positionOffset: {x: 0, y: -35}
+  _parameterName: velocity

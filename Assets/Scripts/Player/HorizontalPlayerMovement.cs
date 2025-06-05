@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Movement))]
 public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
 {
     [SerializeField]
@@ -11,6 +11,17 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     [SerializeField]
     private Rigidbody _rb;
 
+    [Header("Animations")]
+    [SerializeField]
+    private Animator _animator;
+
+    [SerializeField]
+    private AnimatorParameterHasher _velocityParameter;
+
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+
+    [Header("Configuration")]
     [SerializeField]
     private AnimationCurve _speedCurve;
 
@@ -29,7 +40,7 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
     [SerializeField]
     private MovementType _applicationType;
 
-    public Vector2 MovementDirection => new Vector2(_player.MovementInput.ReadValue<Vector2>().x, 0.0f);
+    public Vector3 MovementDirection => new Vector3(_player.MovementInput.ReadValue<Vector2>().x, 0.0f, 0.0f);
 
     public float Speed => _speed;
 
@@ -47,6 +58,10 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
         {
             _rb = GetComponent<Rigidbody>();
         }
+
+        // Renderer does not update the shader values until masks interactions are changed. Haven't found a proper way to update it, so hacky fix for now.
+        _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        _spriteRenderer.maskInteraction = SpriteMaskInteraction.None;
     }
 
     private void Start()
@@ -90,9 +105,21 @@ public class HorizontalPlayerMovement : MonoBehaviour, IMovementInput
             _rb.linearVelocity = Vector3.zero;
             _progress *= 0.5f;
             _isAccelerating = false;
+            UpdateAnimations(velocity, futurePosition);
             return;
         }
 
+        UpdateAnimations(velocity, futurePosition);
         _rb.linearVelocity = velocity;
+    }
+
+    public void UpdateAnimations(Vector3 velocity, Vector3 futurePosition)
+    {
+        float speed = velocity.sqrMagnitude;
+        _animator.SetFloat(_velocityParameter.ID, speed);
+        if (!Mathf.Approximately(speed, 0.0f))
+        {
+            _spriteRenderer.flipX = futurePosition.x > transform.position.x ? false : true;
+        }
     }
 }

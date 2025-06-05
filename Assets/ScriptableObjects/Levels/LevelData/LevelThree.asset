@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4987ca8c931acb042803e2a70c166e7d, type: 3}
-  m_Name: PlayerScore
+  m_Script: {fileID: 11500000, guid: d9bbb49e40eb03a4bb12fa9590dc4b5a, type: 3}
+  m_Name: LevelThree
   m_EditorClassIdentifier: 
-  _StartingLevel: {fileID: 11400000, guid: 08d2c79e11512484c843326f97fc287f, type: 2}
-  _levelUpNotifier: {fileID: 11400000, guid: ff3f2dc6c3ae65846bc852057599253b, type: 2}
+  _nextLevel: {fileID: 0}
+  _spawnData: {fileID: 11400000, guid: d9bec3934cab7c7449fcc122ab1c0418, type: 2}
+  _nextLevelScore: 25

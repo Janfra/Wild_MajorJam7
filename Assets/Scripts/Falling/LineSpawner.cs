@@ -23,17 +23,17 @@ public class LineSpawner : MonoBehaviour
     private Catchable[] _prefabOptions;
 
     [SerializeField]
-    private LevelSpawnData _currentSpawnData;
+    private LevelUpNotifier _levelUpNotifier;
 
     [SerializeField]
     private BasicTimer _spawnTimer;
 
+    private LevelSpawnData _currentSpawnData;
     private float _lastXSpawnPosition;
 
     private void Awake()
     {
         VerifyArray(_prefabOptions);
-        VerifyArray(_currentSpawnData.PossibleActions);
 
         _spawnTimer.SubscribeToCallback(Spawn);
 
@@ -41,16 +41,24 @@ public class LineSpawner : MonoBehaviour
         {
             _enableOnEvent.OnEvent += EnableSpawner;
         }
+
+        if (_levelUpNotifier)
+        {
+            _levelUpNotifier.OnLevelUp += UpdateSpawnSettings;
+        }
+    }
+
+    private void UpdateSpawnSettings(LevelData newLevel)
+    {
+        _currentSpawnData = newLevel.SpawnData;
+        _spawnTimer.TargetDuration = _currentSpawnData.SpawnDelay;
+        _spawnTimer.ResetProgress();
+        VerifyArray(_currentSpawnData.PossibleActions);
     }
 
     private void Start()
     {
-        if (!_isEnabledOnStart)
-        {
-            DisableSpawner();
-        }
-
-        _spawnTimer.TargetDuration = _currentSpawnData.SpawnDelay;
+        DisableSpawner();
     }
 
     private void Update()

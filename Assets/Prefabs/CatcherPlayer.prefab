@@ -326,6 +326,7 @@ MonoBehaviour:
   _catcher: {fileID: 2913250574039955232}
   _playerScore: {fileID: 11400000, guid: 993f496f607f80c4dbff50cd16784710, type: 2}
   _fruitMissed: {fileID: 11400000, guid: 09d62a1f7500e9c428dee4829f611630, type: 2}
+  _gameStarted: {fileID: 11400000, guid: 3674aa04f597ffc4cb3cfc575f4037f6, type: 2}
 --- !u!198 &6458208351336391416
 ParticleSystem:
   m_ObjectHideFlags: 0

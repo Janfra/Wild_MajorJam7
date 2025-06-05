@@ -6856,7 +6856,7 @@ MonoBehaviour:
   _spawnDepth: 1.86
   _prefabOptions:
   - {fileID: 2242897020461454450, guid: 4741558049a73be4a82998e7ac562b35, type: 3}
-  _currentSpawnData: {fileID: 11400000, guid: bbb125e9dc39dbb4c9767f426db0eb63, type: 2}
+  _levelUpNotifier: {fileID: 11400000, guid: ff3f2dc6c3ae65846bc852057599253b, type: 2}
   _spawnTimer:
     _targetDuration: 3
 --- !u!1 &2030067267
@@ -6999,9 +6999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _progressSlider: {fileID: 2036482289}
   _playerScore: {fileID: 11400000, guid: 993f496f607f80c4dbff50cd16784710, type: 2}
-  _scoreRequirements:
-    MinScore: 0
-    MaxScore: 10
+  _levelUpNotifier: {fileID: 11400000, guid: ff3f2dc6c3ae65846bc852057599253b, type: 2}
 --- !u!1 &2045825067 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3659592690840036058, guid: 0607048c7b3e2bb4bac534fd331722b3, type: 3}

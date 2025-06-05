@@ -12,6 +12,9 @@ public class CatchScorer : MonoBehaviour
     [SerializeField]
     private GameEvent _fruitMissed;
 
+    [SerializeField]
+    private GameEvent _gameStarted;
+
     private void Awake()
     {
         if (!_catcher)
@@ -34,6 +37,16 @@ public class CatchScorer : MonoBehaviour
         {
             throw new NullReferenceException($"Player scorer has no player score to set the score to. Please assign one {name}");
         }
+
+        if (_gameStarted)
+        {
+            _gameStarted.OnEvent += StartLevel;
+        }
+    }
+
+    private void StartLevel()
+    {
+        _playerScore.RestartScoreAndLevel();
     }
 
     private void AddCatchScore()
@@ -45,11 +58,4 @@ public class CatchScorer : MonoBehaviour
     {
         _playerScore.Score--;
     }
-}
-
-[Serializable]
-public struct LevelUpRequirements
-{
-    public float MinScore;
-    public float MaxScore;
 }

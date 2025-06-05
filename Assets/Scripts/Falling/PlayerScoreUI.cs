@@ -12,7 +12,7 @@ public class PlayerScoreUI : MonoBehaviour
     private PlayerScore _playerScore;
 
     [SerializeField]
-    private LevelUpRequirements _scoreRequirements;
+    private LevelUpNotifier _levelUpNotifier;
 
     private void Awake()
     {
@@ -25,6 +25,18 @@ public class PlayerScoreUI : MonoBehaviour
         {
             _progressSlider = GetComponent<Slider>();
         }
+
+        if (_levelUpNotifier)
+        {
+            _levelUpNotifier.OnLevelUp += UpdateUI;
+        }
+    }
+
+    private void UpdateUI(LevelData newLevel)
+    {
+        _progressSlider.minValue = 0.0f;
+        _progressSlider.maxValue = newLevel.NextLevelRequiredScore;
+        _progressSlider.value = _progressSlider.value;
     }
 
     private void Start()
@@ -34,8 +46,6 @@ public class PlayerScoreUI : MonoBehaviour
 
     private void UpdateSlider(float score)
     {
-        _progressSlider.minValue = _scoreRequirements.MinScore;
-        _progressSlider.maxValue = _scoreRequirements.MaxScore;
         _progressSlider.value = score;
     }
 }

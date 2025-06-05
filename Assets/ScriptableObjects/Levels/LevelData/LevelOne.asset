@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextLevel: {fileID: 11400000, guid: 252fca78a729c1a46bb69167a60e54d0, type: 2}
   _spawnData: {fileID: 11400000, guid: c07ea4d72e3b83941b2174f26f95d178, type: 2}
-  _nextLevelScore: 10
+  _nextLevelScore: 4

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb7729577b352b4eae5dde43f1c3e45, type: 3}
   m_Name: LevelThree
   m_EditorClassIdentifier: 
-  _spawnDelay: 2.3
-  _minFallSpeed: 150
-  _maxFallSpeed: 215
+  _spawnDelay: 1.6
+  _minFallSpeed: 165
+  _maxFallSpeed: 230
   _minSpeedAtDistance: 6
   _speedReductionCurve:
     serializedVersion: 2

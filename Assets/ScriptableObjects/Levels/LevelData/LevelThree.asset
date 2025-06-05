@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bbb49e40eb03a4bb12fa9590dc4b5a, type: 3}
   m_Name: LevelThree
   m_EditorClassIdentifier: 
-  _nextLevel: {fileID: 0}
+  _nextLevel: {fileID: 11400000, guid: 1503c516ca818794492d269950de7298, type: 2}
   _spawnData: {fileID: 11400000, guid: d9bec3934cab7c7449fcc122ab1c0418, type: 2}
-  _nextLevelScore: 25
+  _nextLevelScore: 10

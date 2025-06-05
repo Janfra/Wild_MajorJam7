@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbb7729577b352b4eae5dde43f1c3e45, type: 3}
-  m_Name: LevelTwo
+  m_Name: LevelFive
   m_EditorClassIdentifier: 
-  _spawnDelay: 2
-  _minFallSpeed: 160
+  _spawnDelay: 1.2
+  _minFallSpeed: 165
   _maxFallSpeed: 230
-  _minSpeedAtDistance: 5
+  _minSpeedAtDistance: 6.6
   _speedReductionCurve:
     serializedVersion: 2
     m_Curve:

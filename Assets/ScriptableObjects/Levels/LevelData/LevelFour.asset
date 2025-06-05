@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9bbb49e40eb03a4bb12fa9590dc4b5a, type: 3}
-  m_Name: LevelTwo
+  m_Name: LevelFour
   m_EditorClassIdentifier: 
-  _nextLevel: {fileID: 11400000, guid: f623099e9d8c10d428f8fb8085b647eb, type: 2}
-  _spawnData: {fileID: 11400000, guid: 44aae610c56aa5a41b472fcebfda9122, type: 2}
-  _nextLevelScore: 5
+  _nextLevel: {fileID: 11400000, guid: 6570f4a1fd22b6948b919dc44f1d23e4, type: 2}
+  _spawnData: {fileID: 11400000, guid: 426c8987528243d4a99db95980e2a948, type: 2}
+  _nextLevelScore: 10

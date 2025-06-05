@@ -27,9 +27,12 @@ public struct CatchActionState
 public class Catcher : MonoBehaviour
 {
     public delegate void CatchActionUpdate(CatcherActions action);
+    public delegate void CatchActionConfirmation();
     public event CatchActionUpdate OnActive;
     public event CatchActionUpdate OnInactive;
     public event CatchActionUpdate OnMain;
+    public event CatchActionConfirmation OnSuccessfulCatch;
+    public event CatchActionConfirmation OnMissCatch;
 
     [SerializeField]
     private PlayerController _player;
@@ -97,6 +100,7 @@ public class Catcher : MonoBehaviour
         _mainModule = _catchParticle.main;
         _mainModule.startColor = Color.green;
         _catchParticle.Play();
+        OnSuccessfulCatch?.Invoke();
     }
 
     public void MissCatch()
@@ -104,6 +108,7 @@ public class Catcher : MonoBehaviour
         _mainModule = _catchParticle.main;
         _mainModule.startColor = Color.darkRed;
         _catchParticle.Play();
+        OnMissCatch?.Invoke();
     }
 
     private void OnCatchActionOne(InputAction.CallbackContext context)

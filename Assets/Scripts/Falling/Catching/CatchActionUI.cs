@@ -10,6 +10,9 @@ public class CatchActionUI : MonoBehaviour
     [SerializeField]
     private Image _highlight;
 
+    [SerializeField]
+    private HighlightSettings _highlightColours;
+
     private bool _isActive;
 
     private void Start()
@@ -37,7 +40,7 @@ public class CatchActionUI : MonoBehaviour
             }
             else
             {
-                UndoHighlight();
+                HighlightToInactive();
             }
         }
     }
@@ -51,7 +54,7 @@ public class CatchActionUI : MonoBehaviour
         }
         else
         {
-            UndoHighlight();
+            HighlightToInactive();
         }
     }
 
@@ -59,7 +62,7 @@ public class CatchActionUI : MonoBehaviour
     {
         if (_highlight)
         {
-            _highlight.color = Color.white;
+            _highlight.color = _highlightColours.Selected;
         }
     }
 
@@ -67,15 +70,15 @@ public class CatchActionUI : MonoBehaviour
     {
         if (_highlight)
         {
-            _highlight.color = Color.black;
+            _highlight.color = _highlightColours.Active;
         }
     }
 
-    private void UndoHighlight()
+    private void HighlightToInactive()
     {
         if (_highlight)
         {
-            _highlight.color = Color.whiteSmoke;
+            _highlight.color = _highlightColours.Inactive;
         }
     }
 }

@@ -4150,7 +4150,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: d32f093ac66dab14da4565288bd3e975, type: 2}
     - target: {fileID: 5553897632548141040, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: m_Name
-      value: CatchInput_3 (1)
+      value: CatchInput_4
       objectReference: {fileID: 0}
     - target: {fileID: 6914571660867672827, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: m_Type
@@ -4199,10 +4199,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 760519719}
   - {fileID: 366588560}
   - {fileID: 950050374}
   - {fileID: 260688734}
-  - {fileID: 760519719}
   m_Father: {fileID: 1257397408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3522917, y: 0.19}

@@ -46,3 +46,10 @@ public class CatchScorer : MonoBehaviour
         _playerScore.Score--;
     }
 }
+
+[Serializable]
+public struct LevelUpRequirements
+{
+    public float MinScore;
+    public float MaxScore;
+}

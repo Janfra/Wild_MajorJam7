@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf37297c8ccc0c4fa685aefea7162c9, type: 3}
   m_Name: ActionOne
   m_EditorClassIdentifier: 
-  _colour: {r: 0.4009434, g: 0.6036335, b: 1, a: 1}
+  _fruitSprite: {fileID: 21300000, guid: 6777469497ba720428db3afd27e5c6e5, type: 3}
   _action: 0

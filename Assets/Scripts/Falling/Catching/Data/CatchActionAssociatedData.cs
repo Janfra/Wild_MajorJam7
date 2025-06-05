@@ -4,8 +4,8 @@ using UnityEngine;
 public class CatchActionAssociatedData : ScriptableObject
 {
     [SerializeField]
-    private Color _colour = Color.white;
-    public Color Colour => _colour;
+    private Sprite _fruitSprite;
+    public Sprite FruitSprite => _fruitSprite;
 
     [SerializeField]
     private CatcherActions _action = CatcherActions.None;

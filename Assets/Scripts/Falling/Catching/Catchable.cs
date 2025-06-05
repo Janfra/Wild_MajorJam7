@@ -16,14 +16,13 @@ public class Catchable : MonoBehaviour
     [SerializeField]
     private Rigidbody _rb;
 
-    [SerializeField]
-    private CatchActionAssociatedData _requiredAction;
 
     [SerializeField]
     private ColorSwap _colourLerper;
 
     private const int _FailLayer = 8;
 
+    private CatcherActions _requiredAction;
     private Coroutine _colorLerpCoroutine;
     private IEnumerator _lerpMethod;
     private float _bounceModifier = 0.0f;
@@ -42,7 +41,6 @@ public class Catchable : MonoBehaviour
         } 
 
         _spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
-        _colourLerper.SetFocusColour(_requiredAction);
     }
 
     private void Start()
@@ -54,14 +52,16 @@ public class Catchable : MonoBehaviour
     {
         if (requiredAction != null)
         {
-            _requiredAction = requiredAction;
-            _colourLerper.SetFocusColour(_requiredAction);
+            _requiredAction = requiredAction.Action;
+            _spriteRenderer.sprite = requiredAction.FruitSprite;
+
+            _colourLerper.SetFocusColour(requiredAction);
         }
     }
 
     public virtual void OnCatch(Catcher catcher)
     {
-        if (catcher.MainAction == _requiredAction.Action)
+        if (catcher.MainAction == _requiredAction)
         {
             Debug.Log("catched");
             OnCatched?.Invoke();
@@ -110,15 +110,15 @@ public class Catchable : MonoBehaviour
     {
         Debug.Log($"Focusing catchable");
         // not very readable, but for simplicity gonna leave it for now
-        _colourLerper.StartTransition(true);
-        StartColourTransition();
+        //_colourLerper.StartTransition(true);
+        //StartColourTransition();
     }
 
     public void OnUnfocus()
     {
         Debug.Log($"Unfocusing catchable");
-        _colourLerper.StartTransition(false);
-        StartColourTransition();
+        //_colourLerper.StartTransition(false);
+        //StartColourTransition();
     }
 
     private void ClearFruit()
@@ -180,7 +180,8 @@ public class ColorSwap
 
     public void SetFocusColour(CatchActionAssociatedData data)
     {
-        _focusColour = data.Colour;
+        // Removing colour during transition to new action system
+        _focusColour = Color.white;
     }
 
     public void StartTransition(bool isFocusTransition)

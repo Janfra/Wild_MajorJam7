@@ -639,6 +639,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+      propertyPath: _highlight
+      value: 
+      objectReference: {fileID: 970252769}
+    - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: _actionData
       value: 
       objectReference: {fileID: 11400000, guid: e89e28b68e1e2a045a7bbf9e25bbbab6, type: 2}
@@ -2198,6 +2202,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551329640}
   m_CullTransparentMesh: 1
+--- !u!114 &625050901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6914571660867672827, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+  m_PrefabInstance: {fileID: 4886358114186327469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &636528927 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -155685785254929413, guid: 7b66e027a9703b848861961a2022aa52, type: 3}
@@ -2338,6 +2353,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+      propertyPath: _highlight
+      value: 
+      objectReference: {fileID: 2046395322}
     - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: _actionData
       value: 
@@ -2704,6 +2723,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+      propertyPath: _highlight
+      value: 
+      objectReference: {fileID: 1053574208}
+    - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: _actionData
       value: 
       objectReference: {fileID: 11400000, guid: 8dff510406f0cb742ab8314789fe5885, type: 2}
@@ -3029,6 +3052,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965954286}
   m_CullTransparentMesh: 1
+--- !u!114 &970252769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6914571660867672827, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+  m_PrefabInstance: {fileID: 260688733}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1014954034
 GameObject:
   m_ObjectHideFlags: 0
@@ -3106,6 +3140,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6405a279400b4349868859f79f73d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1053574208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6914571660867672827, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+  m_PrefabInstance: {fileID: 950050373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1112787583
@@ -4610,6 +4655,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2046395322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6914571660867672827, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+  m_PrefabInstance: {fileID: 760519718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2126857188
 GameObject:
   m_ObjectHideFlags: 0
@@ -4878,6 +4934,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4521920128470991886, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
+      propertyPath: _highlight
+      value: 
+      objectReference: {fileID: 625050901}
     - target: {fileID: 5553897632548141040, guid: 20e5ba64b8a4e0e4082b2ff7d82de312, type: 3}
       propertyPath: m_Name
       value: CatchInput_1

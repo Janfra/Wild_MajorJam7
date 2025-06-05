@@ -8,24 +8,15 @@ public class CatchActionUI : MonoBehaviour
     private CatchActionUIData _actionData;
 
     [SerializeField]
-    private Image _colourDisplay;
+    private Image _highlight;
 
-    [SerializeField]
-    private Image _highlightBorder;
-
-    private Color _actionColor => _actionData.CatchActionData.Colour;
     private bool _isActive;
 
     private void Start()
     {
-        if (_colourDisplay)
+        if (_highlight)
         {
-            _colourDisplay.color = Color.white;
-        }
-
-        if (_highlightBorder)
-        {
-            _highlightBorder.color = _actionColor;
+            _highlight.color = Color.white;
         }
 
         _actionData.OnActiveStateChanged += UpdateHighlightBorder;
@@ -66,25 +57,25 @@ public class CatchActionUI : MonoBehaviour
 
     private void HighlightToMain()
     {
-        if (_highlightBorder)
+        if (_highlight)
         {
-            _highlightBorder.color = Color.white;
+            _highlight.color = Color.white;
         }
     }
 
     private void HighlightToActive()
     {
-        if (_highlightBorder)
+        if (_highlight)
         {
-            _highlightBorder.color = Color.black;
+            _highlight.color = Color.black;
         }
     }
 
     private void UndoHighlight()
     {
-        if (_highlightBorder)
+        if (_highlight)
         {
-            _highlightBorder.color = Color.whiteSmoke;
+            _highlight.color = Color.whiteSmoke;
         }
     }
 }

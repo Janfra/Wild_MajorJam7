@@ -29,7 +29,7 @@ public class PlayerScore : ScriptableObject
     private void SetPlayerScore(float score)
     {
         _playerScore = Mathf.Clamp(score, 0, Mathf.Infinity);
-        OnScoreUpdate?.Invoke(score);
+        OnScoreUpdate?.Invoke(_playerScore);
         if (_playerScore >= _levelUpNotifier.RequiredScoreForNextLevelUp)
         {
             if (_currentLevel.NextLevel)

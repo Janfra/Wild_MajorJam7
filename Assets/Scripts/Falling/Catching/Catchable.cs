@@ -19,7 +19,7 @@ public class Catchable : MonoBehaviour, ISoundEmitter
     [SerializeField]
     private Rigidbody _rb;
 
-    private const int _FailLayer = 8;
+    private const int _FailLayer = 5;
 
     private CatcherActions _requiredAction;
     private Coroutine _colorLerpCoroutine;

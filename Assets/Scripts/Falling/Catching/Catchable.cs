@@ -47,12 +47,13 @@ public class Catchable : MonoBehaviour, ISoundEmitter
         _offscreenTrackerHandle = OffscreenMarkers.Instance.TrackWithMarkerWhileOffscreen(transform);
     }
 
-    public void OnDrop(CatchActionAssociatedData requiredAction)
+    public void OnDrop(CatchActionAssociatedData requiredAction, float fallSpeed)
     {
         if (requiredAction != null)
         {
             _requiredAction = requiredAction.Action;
             _spriteRenderer.sprite = requiredAction.FruitSprite;
+            GetComponent<FallMovement>().SetFallSpeed(fallSpeed);
         }
     }
 

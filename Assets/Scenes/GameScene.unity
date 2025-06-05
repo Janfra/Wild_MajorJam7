@@ -6856,11 +6856,7 @@ MonoBehaviour:
   _spawnDepth: 1.86
   _prefabOptions:
   - {fileID: 2242897020461454450, guid: 4741558049a73be4a82998e7ac562b35, type: 3}
-  _possibleActions:
-  - {fileID: 11400000, guid: 838e7da17c684974c87f9a50b82231d9, type: 2}
-  - {fileID: 11400000, guid: b09bdddb2bacee7459d0f5e52812b7ec, type: 2}
-  - {fileID: 11400000, guid: dd3577037ad516446ab75bac89f57bc0, type: 2}
-  - {fileID: 11400000, guid: a951cb65e78966a489d8757424727aed, type: 2}
+  _currentSpawnData: {fileID: 11400000, guid: bbb125e9dc39dbb4c9767f426db0eb63, type: 2}
   _spawnTimer:
     _targetDuration: 3
 --- !u!1 &2030067267

@@ -23,15 +23,17 @@ public class LineSpawner : MonoBehaviour
     private Catchable[] _prefabOptions;
 
     [SerializeField]
-    private CatchActionAssociatedData[] _possibleActions;
+    private LevelSpawnData _currentSpawnData;
 
     [SerializeField]
     private BasicTimer _spawnTimer;
 
+    private float _lastXSpawnPosition;
+
     private void Awake()
     {
         VerifyArray(_prefabOptions);
-        VerifyArray(_possibleActions);
+        VerifyArray(_currentSpawnData.PossibleActions);
 
         _spawnTimer.SubscribeToCallback(Spawn);
 
@@ -47,6 +49,8 @@ public class LineSpawner : MonoBehaviour
         {
             DisableSpawner();
         }
+
+        _spawnTimer.TargetDuration = _currentSpawnData.SpawnDelay;
     }
 
     private void Update()
@@ -68,7 +72,8 @@ public class LineSpawner : MonoBehaviour
     {
         float xPosition = Random.Range(_spawnXRange.x, _spawnXRange.y);
         Catchable instance = Instantiate(GetRandomItemFromArray(_prefabOptions), GetSpawnVector(xPosition), Quaternion.identity);
-        instance.OnDrop(GetRandomItemFromArray(_possibleActions));
+        instance.OnDrop(GetRandomItemFromArray(_currentSpawnData.PossibleActions), GetFallSpeed(xPosition));
+        _lastXSpawnPosition = xPosition;
     }
 
     private Vector3 GetSpawnVector(float xPosition)
@@ -80,6 +85,18 @@ public class LineSpawner : MonoBehaviour
     {
         int index = Random.Range(0, array.Length);
         return array[index];
+    }
+
+    private float GetFallSpeed(float xSpawnPosition)
+    {
+        float rv = _currentSpawnData.MinFallSpeed;
+
+        if (_currentSpawnData)
+        {
+            return _currentSpawnData.GetSpeedBasedOnDistance(Mathf.Abs(xSpawnPosition - _lastXSpawnPosition));
+        }
+
+        return rv;
     }
 
     private void VerifyArray<T>(T[] array)

@@ -4,7 +4,7 @@ using UnityEngine;
 public class FallMovement : MonoBehaviour, IMovementInput
 {
     [SerializeField]
-    private float _fallSpeed = 3.0f;
+    private float _fallSpeed = 10.0f;
 
     [SerializeField]
     private Rigidbody _rb;
@@ -23,6 +23,11 @@ public class FallMovement : MonoBehaviour, IMovementInput
         _rb.linearVelocity = velocity;
     }
     #endregion
+
+    public void SetFallSpeed(float speed)
+    {
+        _fallSpeed = Mathf.Clamp(speed, 10.0f, Mathf.Infinity);
+    }
 
     private void Awake()
     {
